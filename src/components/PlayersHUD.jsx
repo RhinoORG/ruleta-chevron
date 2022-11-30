@@ -1,9 +1,7 @@
-import React from 'react'
 import { usePlayers } from '../context/PlayersContext'
 
 function PlayersHUD ({ playerActive }) {
   const { players } = usePlayers()
-
   return (
     <aside className='absolute left-5 top-5 z-10 flex my-auto gap-20 flex-col'>
       {players.map((player, index) => (

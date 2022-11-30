@@ -81,7 +81,7 @@ function Ruleta ({ isVisible, playerActive }) {
       {finish && (
         <>
           <h2 className='text-gray-200 text-5xl my-7 uppercase font-medium'>{reward}</h2>
-          <h4 className='text-gray-200 text-3xl my-5 uppercase font-medium'>{movements}</h4>
+          <h4 className='text-gray-200 4text-3xl my-5 uppercase font-medium'>{movements}</h4>
         </>
       )}
     </div>

@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { BsFillPlayFill } from 'react-icons/bs'
 import { toast } from 'react-toastify'
@@ -13,7 +12,6 @@ function Players () {
   const [player3, setPlayer3] = useState('')
   const [player4, setPlayer4] = useState('')
   const [enable, setEnable] = useState(false)
-  // eslint-disable-next-line no-unused-vars
   const [location, navigate] = useLocation()
 
   if (window.localStorage.getItem('players')) return navigate('/game')
@@ -49,8 +47,7 @@ function Players () {
 
       toast.promise(
         async () => {
-          const { data } = await axios.post('https://ruleta-api-production.up.railway.app/api/players', players)
-          createPlayers(data)
+          createPlayers(players)
           navigate('/game')
         }, {
           success: 'Jugadores Creados',

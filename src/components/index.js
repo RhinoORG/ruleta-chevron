@@ -5,6 +5,4 @@ export { default as Layout } from './Layout'
 export { default as PlayersHUD } from './PlayersHUD'
 export { default as Routers } from './Routes'
 export { default as Ruleta } from './Ruleta'
-export { default as RuletaModal } from './RuletaModal'
 export { default as Screen } from './Screen'
-

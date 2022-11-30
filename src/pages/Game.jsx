@@ -9,6 +9,7 @@ function Game () {
   const [wordToGuess, setWordToGuess] = useState(getWord())
   const [guessedLetters, setGuessedLetters] = useState([])
   const [showRuleta, setShowRuleta] = useState(false)
+  const [showAction, setShowAction] = useState(true)
   const [showFinishGameModal, setFinishGameModal] = useState(false)
 
   // eslint-disable-next-line no-unused-vars
@@ -18,6 +19,7 @@ function Game () {
     setShowRuleta((prev) => !prev)
     setTimeout(() => {
       setShowRuleta((prev) => !prev)
+      setShowAction(false)
     }, 6000)
   }
 
@@ -39,6 +41,7 @@ function Game () {
     if (playerTurn === playersCantity - 1) {
       setPlayerTurn(0)
     }
+    setShowAction(true)    
   }
 
   const incorrectLetters = guessedLetters.filter(
@@ -81,10 +84,11 @@ function Game () {
     }
 
     document.addEventListener('keypress', handler)
-
     return () => {
       document.removeEventListener('keypress', handler)
     }
+   
+
   }, [guessedLetters])
 
   useEffect(() => {
@@ -96,7 +100,7 @@ function Game () {
       addGuessedLetter(key)
       if (!wordToGuess.includes(key)) changePlayerTurn()
     }
-
+    
     document.addEventListener('keypress', handler)
 
     return () => {
@@ -137,9 +141,16 @@ function Game () {
           inactiveLetters={incorrectLetters}
         />
       </div>
-      <button onClick={handleClickRuleta} className='absolute right-20 z-30 w-40 h-40 rounded-full border-4 border-gray-800 text-white text-2xl uppercase font-black [letter-spacing:0.1em] hover:[letter-spacing:0.25em] transition hover:scale-105 btn-shadow'>
-        Girar
-      </button>
+      {showAction !== false &&
+        <section className='h-full w-full bg-black/5 backdrop-blur-sm  absolute flex justify-center items-center'>
+        <div className='right-20 z-30 w-60 h-60  flex justify-center items-center'>
+        <div className='animate-ping absolute w-36 h-36 rounded-full opacity-75 bg-green-600'></div>
+        <button onClick={handleClickRuleta} className='relative z-30 w-40 h-40 rounded-full bg-green-600 text-white text-2xl uppercase font-black [letter-spacing:0.1em] hover:[letter-spacing:0.25em] transition hover:scale-105'>
+          Girar
+        </button>
+        </div>
+        </section>
+      }
       <Ruleta isVisible={showRuleta} playerActive={playerTurn} />
       {showFinishGameModal && (
         <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm z-50 flex justify-center items-center flex-col'>
