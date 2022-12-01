@@ -55,7 +55,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
       setFinish(true)
 
       if (reward == 'COMODIN') {
-        player.puntos = 500 + player.puntos;
+        player.puntos = 100 + player.puntos;
         setShowButton(false)
         setFinish(true)
         setShowMessage(true)
