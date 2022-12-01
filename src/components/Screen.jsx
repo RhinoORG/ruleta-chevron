@@ -11,8 +11,10 @@ function Screen ({
   track
 }) {
   return (
-    <div className='relative p-4 my-20 flex gap-1 items-center justify-center flex-wrap tv'>
-  <span>{track}</span>
+    <>
+    <span className=' text-white text-3xl font-bold uppercase'>{track}</span>
+    <div className='relative p-4 my-10 gap-1 flex flex-wrap w-7/12'>
+  
       <Spacer />
       {wordToGuess.split(' ').map((letter, index) => {
         return (
@@ -29,6 +31,7 @@ function Screen ({
         )
       })}
     </div>
+    </>
   )
 }
 
