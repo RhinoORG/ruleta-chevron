@@ -1,12 +1,16 @@
-const words = [
-  'luces camara y accion',
-  'la vida es una pelicula',
-  'que ahorita es que comienza',
-  'chevron proyecto web'
-]
-
-export function getWord () {
-  return words[Math.floor(Math.random() * words.length)]
+const words = [ 
+  { 
+    track: "refran venezolano", 
+    phrase: "El que se fue a la villa perdio su silla" 
+  }, 
+  { 
+    track: "trabalenguas", 
+    phrase: "pablito clavo un clavito, un clavito clavo pablito" 
+  } 
+] 
+ 
+export function getWord () { 
+    return words[Math.floor(Math.random() * words.length)] 
 }
 
 export const KEYS = [

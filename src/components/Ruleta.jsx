@@ -59,7 +59,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         setShowButton(false)
         setFinish(true)
         setShowMessage(true)
-        setMovements('Has ganado 500 pts. Puedes girar la ruleta de nuevo')
+        setMovements('Has ganado 100 pts. Puedes girar la ruleta de nuevo')
         return
       }
 

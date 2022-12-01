@@ -6,7 +6,7 @@ import { usePlayers } from '../context/PlayersContext'
 
 function Game () {
   const { players, playerTurn, setPlayerTurn } = usePlayers()
-  const [wordToGuess, setWordToGuess] = useState(getWord())
+  const [wordToGuess, setWordToGuess] = useState(getWord().phrase)
   const [guessedLetters, setGuessedLetters] = useState([])
   const [showRuleta, setShowRuleta] = useState(false)
   const [showAction, setShowAction] = useState(true)
@@ -131,7 +131,7 @@ function Game () {
     <Layout>
       <PlayersHUD playerActive={playerTurn} />
       <EndGame />
-      <Screen guessedLetters={guessedLetters} wordToGuess={wordToGuess} />
+      <Screen guessedLetters={guessedLetters} track={getWord().track} wordToGuess={wordToGuess} />
       <div className='max-w-3xl'>
         <Keyboard
           disabled={isWinner}

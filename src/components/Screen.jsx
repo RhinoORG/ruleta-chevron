@@ -7,10 +7,12 @@ const Spacer = () => (
 function Screen ({
   guessedLetters,
   wordToGuess,
-  reveal = false
+  reveal = false,
+  track
 }) {
   return (
     <div className='relative p-4 my-20 flex gap-1 items-center justify-center flex-wrap tv'>
+  <span>{track}</span>
       <Spacer />
       {wordToGuess.split(' ').map((letter, index) => {
         return (
