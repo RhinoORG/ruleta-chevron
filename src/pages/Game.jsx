@@ -11,6 +11,7 @@ function Game () {
   const [showRuleta, setShowRuleta] = useState(false)
   const [showAction, setShowAction] = useState(true)
   const [showFinishGameModal, setFinishGameModal] = useState(false)
+  const [step, setStep] =  useState(0)
 
   // eslint-disable-next-line no-unused-vars
   const [location, navigate] = useLocation()
@@ -129,6 +130,8 @@ function Game () {
 
   return (
     <Layout>
+      {step === 0 && (
+      <>
       <PlayersHUD playerActive={playerTurn} />
       <EndGame />
       <Screen guessedLetters={guessedLetters} track={getWord().track} wordToGuess={wordToGuess} />
@@ -142,6 +145,8 @@ function Game () {
           inactiveLetters={incorrectLetters}
         />
       </div>
+      </>
+)}
       {showAction !== false &&
         <section className='h-full w-full bg-black/5 backdrop-blur-sm  absolute flex justify-center items-center'>
         <div className='right-20 z-30 w-60 h-60  flex justify-center items-center'>
@@ -165,7 +170,7 @@ function Game () {
         </div>
       )}
       <button className='absolute w-14 h-14 rounded-full right-3 top-2 border-4 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow' onClick={() => setFinishGameModal((prev) => !prev)}>X</button>
-    </Layout>
+      </Layout>
   )
 }
 
