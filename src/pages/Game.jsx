@@ -50,6 +50,8 @@ function Game () {
     letter => !wordToGuess.includes(letter)
   )
 
+  let isWinnerArray = []
+
   const isWinner = wordToGuess
     .split('')
     .every(letter => guessedLetters.includes(letter))

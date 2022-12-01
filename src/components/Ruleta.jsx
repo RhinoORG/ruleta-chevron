@@ -36,15 +36,21 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
   const [finish, setFinish] = useState(true)
   const [showButton, setShowButton] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
+  const [isClicked, setIsClicked] = useState(false)
 
   if (!isVisible) return null
+
+  console.log(isClicked)
 
   function rotate() {
     const idx = getRandomIdx(1, 10)
     const opt = opts[idx]
 
-    console.log(opt)
+    if (isClicked) {
+      return null
+    }
 
+    console.log(opt)
     setRotateDeg(opt.value)
 
     setTimeout(() => {
@@ -59,6 +65,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         setShowButton(false)
         setFinish(true)
         setShowMessage(true)
+        setIsClicked(false)
         setMovements('Has ganado 100 pts. Puedes girar la ruleta de nuevo')
         return
       }
@@ -68,6 +75,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         setFinish(true)
         setShowMessage(true)
         setMovements('Te has quedado sin puntos')
+        setIsClicked(false)
 
         const playersCantity = players.length
 
@@ -84,6 +92,8 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         setFinish(true)
         setShowMessage(true)
         setShowButton(false)
+        setIsClicked(false)
+
         player.puntos = player.puntos
 
         const playersCantity = players.length
@@ -119,7 +129,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         <>
           <div className='w-3 h-14 bg-cyan-500 rounded-b-xl relative -bottom-6   z-50' />
 
-          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${rotateDeg}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={rotate} alt='' />
+          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${rotateDeg}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true)}} alt='' />
         </>)
       }
 
@@ -137,6 +147,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
             removeRuletaFromRuleta(false)
             setShowMessage(false)
             setShowButton(false)
+            setIsClicked(false)
           }}>
           Jugar
         </button>

@@ -1,11 +1,11 @@
 const words = [ 
   { 
     track: "refran venezolano", 
-    phrase: "El que se fue a la villa perdio su silla" 
+    phrase: "el que se fue a la villa perdio su silla" 
   }, 
   { 
     track: "trabalenguas", 
-    phrase: "pablito clavo un clavito, un clavito clavo pablito" 
+    phrase: "pablito clavo un clavito un clavito clavo pablito" 
   } 
 ] 
  
