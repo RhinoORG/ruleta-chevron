@@ -15,10 +15,13 @@ function Game () {
   // eslint-disable-next-line no-unused-vars
   const [location, navigate] = useLocation()
 
-  const handleClickRuleta = () => {
-    setShowRuleta((prev) => !prev)
+  const removeRuletaFromRuleta = () => {
+    setShowRuleta(false)
+  }
 
-      setShowAction(false)
+  const handleClickRuleta = () => {
+    setShowRuleta(true)
+    setShowAction(false)
   }
 
   const handleFinishGame = () => {
@@ -149,7 +152,7 @@ function Game () {
         </div>
         </section>
       }
-      <Ruleta isVisible={showRuleta} playerActive={playerTurn} />
+      <Ruleta isVisible={showRuleta} playerActive={playerTurn} removeRuletaFromRuleta={removeRuletaFromRuleta} />
       {showFinishGameModal && (
         <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm z-50 flex justify-center items-center flex-col'>
           <div className='w-[450px] h-52 bg-slate-800 flex items-center flex-col justify-evenly rounded-md'>

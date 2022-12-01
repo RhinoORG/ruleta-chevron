@@ -16,6 +16,8 @@ function Players () {
 
   if (window.localStorage.getItem('players')) return navigate('/game')
 
+  console.log(player1, player2)
+
   useEffect(() => {
     if (player1 !== '' && player2 !== '') setEnable(true)
     else setEnable(false)
@@ -27,21 +29,25 @@ function Players () {
 
       const players = [
         {
-          name: player1
+          name: player1,
+          puntos: 0
         },
         {
-          name: player2
+          name: player2,
+          puntos: 0
         }
       ]
 
       if (player3 !== '') {
         players.push({
-          name: player3
+          name: player3,
+          puntos: 0
         })
       }
       if (player4 !== '') {
         players.push({
-          name: player4
+          name: player4,
+          puntos: 0
         })
       }
 
