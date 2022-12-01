@@ -17,10 +17,8 @@ function Game () {
 
   const handleClickRuleta = () => {
     setShowRuleta((prev) => !prev)
-    setTimeout(() => {
-      setShowRuleta((prev) => !prev)
+
       setShowAction(false)
-    }, 6000)
   }
 
   const handleFinishGame = () => {

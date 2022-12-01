@@ -75,13 +75,17 @@ function Ruleta ({ isVisible, playerActive }) {
   }
 
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm z-50 flex justify-center items-center flex-col'>
+    <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm  flex justify-center items-center flex-col'>
       <div className='w-3 h-14 bg-cyan-500 rounded-b-xl relative -bottom-6 z-50' />
       <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${rotateDeg}deg` }} className='w-[400px] h-[400px] rounded-full' onClick={rotate} alt='' />
       {finish && (
         <>
           <h2 className='text-gray-200 text-5xl my-7 uppercase font-medium'>{reward}</h2>
           <h4 className='text-gray-200 4text-3xl my-5 uppercase font-medium'>{movements}</h4>
+          <button className='bg-lime-500 px-5 py-2 rounded-md font-semibold relative text-white' onClick={() => {
+        setFinish(false),
+        isVisible = false
+      }}>Jugar</button>
         </>
       )}
     </div>
