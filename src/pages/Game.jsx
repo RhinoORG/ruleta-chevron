@@ -140,12 +140,40 @@ function Game () {
   }, [guessedLetters])
 
   useEffect(() => { 
-    if (wordToGuess.split() === guessedLetters) console.log('winner') 
+    if (wordToGuess.split() === guessedLetters) {console.log('winner')} 
+    if(isWinner === true){
+      setStep(1)
+    }
   }, [isWinner])
 
   return (
     <Layout>
       {step === 0 && (
+      <>
+      <PlayersHUD playerActive={playerTurn} />
+      <EndGame />
+      <Screen guessedLetters={guessedLetters} track={getWord().track} wordToGuess={wordToGuess} />
+      <div className='max-w-3xl'>
+        <Keyboard
+          disabled={isWinner}
+          addGuessedLetter={addGuessedLetter}
+          activeLetters={guessedLetters.filter(letter =>
+            wordToGuess.includes(letter)
+          )}
+          inactiveLetters={incorrectLetters}
+        />
+      </div>
+      </>
+)}
+{step === 1 && (
+  <>
+  <span></span>
+   <h1 className='text-white text-4xl font-bold uppercase'>¡En hora buena, has ganado la ronda calificatoria!</h1>
+   <p className='text-gray-200 4text-3xl my-5 uppercase font-medium'>Decifra la frase final para ganar el juego...</p>
+   <button className='bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold  relative text-white' onClick={() => {setStep(2)}}>Avanzar</button>
+  </>
+)}
+ {step === 2 && (
       <>
       <PlayersHUD playerActive={playerTurn} />
       <EndGame />
