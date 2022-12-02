@@ -47,14 +47,9 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
     if (isClicked) {
       return null
     }
-<<<<<<< HEAD
-    
-    setRotateDeg(opt.value)
-=======
 
     console.log(opt)
     setRotateDeg(opt.value / 99)
->>>>>>> cdde3d47284603703b71a16a9329854a63c07cb8
 
     setTimeout(() => {
       const reward = opt.name
