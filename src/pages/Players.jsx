@@ -16,8 +16,6 @@ function Players () {
 
   if (window.localStorage.getItem('players')) return navigate('/game')
 
-  console.log(player1, player2)
-
   useEffect(() => {
     if (player1 !== '' && player2 !== '') setEnable(true)
     else setEnable(false)

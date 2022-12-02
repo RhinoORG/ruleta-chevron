@@ -1,4 +1,3 @@
-export { default as Button } from './Button'
 export { default as EndGame } from './EndGame'
 export { default as Keyboard } from './Keyboard'
 export { default as Layout } from './Layout'

@@ -40,8 +40,6 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
 
   if (!isVisible) return null
 
-  console.log(isClicked)
-
   function rotate() {
     const idx = getRandomIdx(1, 10)
     const opt = opts[idx]
@@ -49,8 +47,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
     if (isClicked) {
       return null
     }
-
-    console.log(opt)
+    
     setRotateDeg(opt.value)
 
     setTimeout(() => {

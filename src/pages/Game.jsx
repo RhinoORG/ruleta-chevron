@@ -19,6 +19,7 @@ function Game () {
   const removeRuletaFromRuleta = () => {
     setShowRuleta(false)
   }
+  console.log(wordToGuess)
 
   const handleClickRuleta = () => {
     setShowRuleta(true)
@@ -43,18 +44,28 @@ function Game () {
     if (playerTurn === playersCantity - 1) {
       setPlayerTurn(0)
     }
-    setShowAction(true)    
+    setShowAction(true)
   }
 
   const incorrectLetters = guessedLetters.filter(
     letter => !wordToGuess.includes(letter)
   )
 
-  let isWinnerArray = []
+  const correctLetters = guessedLetters.filter(
+    letter => wordToGuess.includes(letter)
+  )
 
-  const isWinner = wordToGuess
-    .split('')
-    .every(letter => guessedLetters.includes(letter))
+  
+  let isWinnerArray = [];
+
+  isWinnerArray.push(wordToGuess.split(""))
+  guessedLetters.push(" ")
+
+  const isWinner = isWinnerArray[0].includes(correctLetters)
+  console.log(correctLetters, "letters")
+  console.log(isWinnerArray[0], "IsWinner")
+  console.log(isWinner)
+    
 
   const addGuessedLetter = useCallback(
     (letter) => {
@@ -65,9 +76,7 @@ function Game () {
     [guessedLetters, isWinner]
   )
 
-  useEffect(() => {
-    if (wordToGuess.split() === guessedLetters) console.log('winner')
-  }, [isWinner])
+
 
   useEffect(() => {
     const handler = (e) => {
