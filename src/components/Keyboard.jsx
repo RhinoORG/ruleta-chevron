@@ -4,7 +4,9 @@ function Keyboard ({
   activeLetters,
   inactiveLetters,
   addGuessedLetter,
-  disabled = false
+  disabled = false,
+  sumCount,
+  wordToGuess
 }) {
   return (
     <div
@@ -13,9 +15,16 @@ function Keyboard ({
       {KEYS.map(key => {
         const isActive = activeLetters.includes(key)
         const isInactive = inactiveLetters.includes(key)
+        const containLetter = !wordToGuess.includes(key)
+
         return (
           <button
-            onClick={() => addGuessedLetter(key)}
+            onClick={() => {
+              if(containLetter) {
+                sumCount()
+              }
+              addGuessedLetter(key)
+            }}
             className={`w-full letter ${isActive ? 'text-green-500 border-green-500 hover:bg-transparent cursor-not-allowed' : ''} ${
               isInactive ? 'text-red-500 border-red-500 hover:bg-transparent cursor-not-allowed' : ''
             }`}

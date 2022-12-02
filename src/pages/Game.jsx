@@ -12,18 +12,29 @@ function Game () {
   const [showAction, setShowAction] = useState(true)
   const [showFinishGameModal, setFinishGameModal] = useState(false)
   const [step, setStep] =  useState(0)
+  const [count, setCount] = useState(0)
+  const [movements, setMovements] = useState(0)
 
   // eslint-disable-next-line no-unused-vars
   const [location, navigate] = useLocation()
 
-  const removeRuletaFromRuleta = () => {
-    setShowRuleta(false)
-  }
-  console.log(wordToGuess)
-
   const handleClickRuleta = () => {
     setShowRuleta(true)
     setShowAction(false)
+    setCount(0)
+    setMovements(0)
+  }
+
+  const setMovementsToPlay = (n) => {
+    setMovements(n)
+  }
+
+  const sumCount = () => {
+    setCount(count + 1)
+  }
+
+  const removeRuletaFromRuleta = () => {
+    setShowRuleta(false)
   }
 
   const handleFinishGame = () => {
@@ -38,12 +49,14 @@ function Game () {
   const changePlayerTurn = () => {
     const playersCantity = players.length
 
-    if (playerTurn < playersCantity - 1) {
+
+    if ((playerTurn < playersCantity - 1)) {
       setPlayerTurn(playerTurn + 1)
     }
-    if (playerTurn === playersCantity - 1) {
+    if ((playerTurn === playersCantity - 1)) {
       setPlayerTurn(0)
     }
+  
     setShowAction(true)
   }
 
@@ -55,44 +68,48 @@ function Game () {
     letter => wordToGuess.includes(letter)
   )
 
-  
+
   let isWinnerArray = [];
 
   isWinnerArray.push(wordToGuess.split(""))
   guessedLetters.push(" ")
 
   const isWinner = isWinnerArray[0].every(letter => correctLetters.includes(letter))
-  console.log(correctLetters, "letters")
-  console.log(isWinnerArray[0], "IsWinner")
-  console.log(isWinner)
-    
 
-  const addGuessedLetter = useCallback(
-    (letter) => {
-      if (guessedLetters.includes(letter) || isWinner) return
-      if (!wordToGuess.includes(letter)) changePlayerTurn()
+  // Funcion para cambiar turno si se lanza letra equivocada
+  const addGuessedLetter = useCallback((letter) => {
+      if (guessedLetters.includes(letter) || isWinner) {
+        return
+      }
+      if (!wordToGuess.includes(letter) && (count == movements)) {
+          changePlayerTurn()
+      }
       setGuessedLetters(currentLetters => [...currentLetters, letter])
     },
     [guessedLetters, isWinner]
   )
 
+  console.log(`Este es el count ${count}`)
+  console.log(`Este es el movenment ${movements}`)
 
-
+  //Letra no encontrada en la frase (ROJO)
   useEffect(() => {
     const handler = (e) => {
       const key = e.key
       if (!key.match(/^[a-z]$/)) return
 
       e.preventDefault()
+
       if (!wordToGuess.includes(key)) {
         const playersCantity = players.length - 1
-
+       
         if (playerTurn < playersCantity) {
           setPlayerTurn(playerTurn + 1)
         }
         if (playerTurn === playersCantity) {
           setPlayerTurn(0)
         }
+    
       }
     }
 
@@ -100,18 +117,25 @@ function Game () {
     return () => {
       document.removeEventListener('keypress', handler)
     }
-   
-
   }, [guessedLetters])
 
+  // Letra encontrada en la frase VERDE
   useEffect(() => {
     const handler = (e) => {
       const key = e.key
-      if (!key.match(/^[a-z]$/)) return
+      if (!key.match(/^[a-z]$/)) {
+        return
+      }
 
       e.preventDefault()
+
       addGuessedLetter(key)
-      if (!wordToGuess.includes(key)) changePlayerTurn()
+
+      if (!wordToGuess.includes(key)) {
+  
+        changePlayerTurn()
+  
+      }
     }
     
     document.addEventListener('keypress', handler)
@@ -124,10 +148,16 @@ function Game () {
   useEffect(() => {
     const handler = (e) => {
       const key = e.key
-      if (key !== 'Enter') return
+      if (key !== 'Enter') {
+        return
+      }
 
       e.preventDefault()
-      if (!wordToGuess.includes(key)) console.log(key)
+
+      if (!wordToGuess.includes(key)) {
+        console.log(key)
+      }
+
       setGuessedLetters([])
       setWordToGuess(getWord())
     }
@@ -161,6 +191,8 @@ function Game () {
             wordToGuess.includes(letter)
           )}
           inactiveLetters={incorrectLetters}
+          sumCount={sumCount}
+          wordToGuess={wordToGuess}
         />
       </div>
       </>
@@ -200,7 +232,7 @@ function Game () {
         </div>
         </section>
       }
-      <Ruleta isVisible={showRuleta} playerActive={playerTurn} removeRuletaFromRuleta={removeRuletaFromRuleta} />
+      <Ruleta isVisible={showRuleta} playerActive={playerTurn} removeRuletaFromRuleta={removeRuletaFromRuleta} setMovementsToPlay={setMovementsToPlay}/>
       {showFinishGameModal && (
         <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm z-50 flex justify-center items-center flex-col'>
           <div className='w-[450px] h-52 bg-slate-800 flex items-center flex-col justify-evenly rounded-md'>
