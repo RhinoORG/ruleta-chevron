@@ -9,14 +9,14 @@ const opts = [
   { name: 'COMODIN', value: 240, movements: 0 },
 
   { name: 25, value: 330, movements: 1 },
-  { name: 25, value: 170, movements: 1 },
   { name: 25, value: 80, movements: 1 },
   { name: 25, value: 33.6, movements: 1 },
-
-  { name: 50, value: 300, movements: 2 },
-  { name: 50, value: 150, movements: 2 },
+  
   { name: 50, value: 66.8, movements: 2 },
-
+  { name: 50, value: 170, movements: 2 },
+  { name: 50, value: 300, movements: 2 },
+  
+  { name: 75, value: 150, movements: 3 },
   { name: 75, value: 280, movements: 3 },
   { name: 75, value: 190, movements: 3 },
 
@@ -47,8 +47,14 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
     if (isClicked) {
       return null
     }
+<<<<<<< HEAD
     
     setRotateDeg(opt.value)
+=======
+
+    console.log(opt)
+    setRotateDeg(opt.value / 99)
+>>>>>>> cdde3d47284603703b71a16a9329854a63c07cb8
 
     setTimeout(() => {
       const reward = opt.name
@@ -76,12 +82,16 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
 
         const playersCantity = players.length
 
-        if (playerTurn < playersCantity - 1) {
-          setPlayerTurn(playerTurn + 1)
-        }
-        if (playerTurn === playersCantity - 1) {
-          setPlayerTurn(0)
-        }
+        setTimeout(() => {
+          if (playerTurn < playersCantity - 1) {
+            setPlayerTurn(playerTurn + 1)
+          }
+          if (playerTurn === playersCantity - 1) {
+            setPlayerTurn(0)
+          }
+          setReward('Siguiente jugador')
+          setMovements(`Turno de ${player.name}`)
+        }, 3000)
       }
 
       if (reward == 'PIERDE TURNO') {
@@ -95,12 +105,18 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
 
         const playersCantity = players.length
 
-        if (playerTurn < playersCantity - 1) {
-          setPlayerTurn(playerTurn + 1)
-        }
-        if (playerTurn === playersCantity - 1) {
-          setPlayerTurn(0)
-        }
+        setTimeout(() => {
+          if (playerTurn < playersCantity - 1) {
+            setPlayerTurn(playerTurn + 1)
+          }
+          if (playerTurn === playersCantity - 1) {
+            setPlayerTurn(0)
+          }
+          setReward('Siguiente jugador')
+          setMovements(`Turno de ${player.name}`)
+        }, 3000)
+
+       
 
       }
 
@@ -126,7 +142,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         <>
           <div className='w-3 h-14 bg-cyan-500 rounded-b-xl relative -bottom-6   z-50' />
 
-          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${rotateDeg}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true)}} alt='' />
+          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg * 100)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true)}} alt='' />
         </>)
       }
 
