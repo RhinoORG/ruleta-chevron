@@ -11,11 +11,11 @@ const opts = [
   { name: 25, value: 330, movements: 1 },
   { name: 25, value: 80, movements: 1 },
   { name: 25, value: 33.6, movements: 1 },
-  
+
   { name: 50, value: 66.8, movements: 2 },
   { name: 50, value: 170, movements: 2 },
   { name: 50, value: 300, movements: 2 },
-  
+
   { name: 75, value: 150, movements: 3 },
   { name: 75, value: 280, movements: 3 },
   { name: 75, value: 190, movements: 3 },
@@ -48,7 +48,6 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
       return null
     }
 
-    console.log(opt)
     setRotateDeg(opt.value / 99)
 
     setTimeout(() => {
@@ -111,7 +110,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
           setMovements(`Turno de ${player.name}`)
         }, 3000)
 
-       
+
 
       }
 
@@ -137,7 +136,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         <>
           <div className='w-3 h-14 bg-cyan-500 rounded-b-xl relative -bottom-6   z-50' />
 
-          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg * 100)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true)}} alt='' />
+          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg * 100)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true) }} alt='' />
         </>)
       }
 

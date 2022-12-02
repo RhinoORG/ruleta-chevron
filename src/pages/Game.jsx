@@ -58,13 +58,16 @@ function Game () {
   
   let isWinnerArray = [];
 
-  isWinnerArray.push(wordToGuess.split(""))
+  isWinnerArray.push(wordToGuess)
   guessedLetters.push(" ")
 
   const isWinner = isWinnerArray[0].includes(correctLetters)
+
+
   console.log(correctLetters, "letters")
-  console.log(isWinnerArray[0], "IsWinner")
+  console.log(isWinnerArray, "IsWinnerArray")
   console.log(isWinner)
+  console.log(wordToGuess)
     
 
   const addGuessedLetter = useCallback(
@@ -138,6 +141,10 @@ function Game () {
       document.removeEventListener('keypress', handler)
     }
   }, [guessedLetters])
+
+  useEffect(() => { 
+    if (wordToGuess.split() === guessedLetters) console.log('winner') 
+  }, [isWinner])
 
   return (
     <Layout>
