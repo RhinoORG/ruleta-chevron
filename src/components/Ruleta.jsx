@@ -28,7 +28,7 @@ function getRandomIdx(min, max) {
   return Math.floor(Math.random() * (max - min) + min)
 }
 
-function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
+function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsToPlay }) {
   const { players, setPlayerTurn, playerTurn } = usePlayers()
   const [rotateDeg, setRotateDeg] = useState(0)
   const [reward, setReward] = useState('')
@@ -49,6 +49,8 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
     }
 
     setRotateDeg(opt.value / 99)
+
+    console.log(opt)
 
     setTimeout(() => {
       const reward = opt.name
@@ -118,8 +120,10 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta }) {
         setShowMessage(true)
         setShowButton(true)
         setFinish(false)
-        setMovements(`Haz ganado ${opt.movements} letras`)
-
+        setMovements(`Haz ganado ${opt.movements + 1} letras`)
+  
+        setMovementsToPlay(opt.movements)
+      
         player.puntos = player.puntos + reward
       }
 
