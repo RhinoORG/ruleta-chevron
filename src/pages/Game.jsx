@@ -216,25 +216,21 @@ console.log(preWinnerPts);
   {players.map((player, index) => {
             if (player.puntos === preWinnerPts) {
               return (
-                <div className="transition relative flex items-center gap-2 border-4 border-cyan-500 rounded-md px-4 py-2 mb-10">
-                  <header className="w-12 h-12 rounded-full bg-cyan-500 flex items-center justify-center text-2xl font-medium text-gray-200">
-                    J{index + 1}
-                  </header>
-                  <div className="flex flex-col justify-arround items-center">
-                    <span className="text-white uppercase text-xs font-medium my-3">
-                      {player.name}
-                    </span>
-                    <div className="text-xl py-2 mb-2 font-medium rounded-xl flex items-center justify-center text-gray-200 bg-cyan-500 w-24 z-20">
-                      {player.puntos}
-                    </div>
-                  </div>
-                </div>
+<div className='transition relative flex items-center gap-2 border-2 border-cyan-500 rounded-xl px-2 py-2 mb-10'>
+<header className='w-12 h-16 rounded-xl bg-cyan-500 flex items-center justify-center text-2xl font-medium text-gray-200'>
+  J{index + 1}
+</header>
+<div className=' flex items-center justify-center flex-col'>
+  <span className='  text-white uppercase text-xs font-medium '>{player.name}</span>
+  <div className='mb-2 text-xl font-medium rounded-xl flex items-center justify-center text-gray-200 w-24 z-20'>PTS: {player.puntos}</div>
+</div>
+</div>
               );
             }
           })}
    <h1 className='text-white text-4xl font-bold uppercase'>¡En hora buena, has ganado la ronda calificatoria!</h1>
    <p className='text-gray-200 4text-3xl my-5 uppercase font-medium'>Decifra la frase final para ganar el juego...</p>
-   <button className='bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold  relative text-white' onClick={() => {setStep(2)}}>Avanzar</button>
+   <button className='bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold rounded-xl relative text-white' onClick={() => {setStep(2)}}>Avanzar</button>
   </>
 )}
  {step === 2 && (
@@ -273,13 +269,13 @@ console.log(preWinnerPts);
             </h1>
             <div className="flex justify-center items-center gap-6">
               <button
-                className="bg-lime-500 px-5 py-2 rounded-md font-semibold relative text-white"
+                className="bg-lime-500 px-5 py-2 rounded-xl font-semibold relative text-white"
                 onClick={handleFinishGame}
               >
                 Aceptar
               </button>
               <button
-                className="border border-gray-200 px-5 py-2 rounded-md font-semibold text-white"
+                className="border border-gray-200 px-5 py-2 rounded-xl font-semibold text-white"
                 onClick={() => setFinishGameModal((prev) => !prev)}
               >
                 Cancelar

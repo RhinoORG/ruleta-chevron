@@ -134,11 +134,15 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
   }
 
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm  flex justify-center items-center flex-col'>
+    <div className='fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm  flex justify-center items-center flex-col'>
 
       {finish && (
         <>
-          <div className='w-3 h-14 bg-cyan-500 rounded-b-xl relative -bottom-6   z-50' />
+          <div className='w-3 h-14  relative -bottom-6   z-50' >
+          <svg height="200" width="200">
+        <polygon points="10,100 25,0 0,0" fill="red" />
+      </svg>
+            </div>
 
           <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg * 100)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true) }} alt='' />
         </>)
@@ -152,7 +156,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
 
       {showButton &&
         <button
-          className='bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold  relative text-white'
+          className='bg-lime-500 px-5 py-2 my-4 rounded-xl rounded-mfont-semibold  relative text-white'
           onClick={() => {
             setFinish(true);
             removeRuletaFromRuleta(false)
