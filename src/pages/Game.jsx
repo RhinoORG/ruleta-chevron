@@ -93,19 +93,8 @@ function Game() {
   let isWinner = isWinnerArray[0].every((letter) =>
     correctLetters.includes(letter)
   );
-
-  // console.log("IsWinnerArray", isWinnerArray[0]);
-  
-  const handleRevelar = () => {
-    setShowRuleta(false);
-    setShowAction(false);
-    correctLetters.push(wordToGess.phrase);
-  }
-
   
   console.log('CorrectLetters', correctLetters)
-
-  
 
   /**
    * Funcion para calcular el mayor puntuaje ganador o empate
@@ -116,7 +105,7 @@ function Game() {
   //Puntos completos de la partida
   let pts = [];
 
-  players.map((player) => {
+  players && players.map((player) => {
     pts.push(player.puntos);
   });
 
@@ -126,12 +115,19 @@ function Game() {
   //Player empatados, con nombres y puntos
   let tiePoints = [];
 
-  players.map((player) => {
+  players && players.map((player) => {
     if (player.puntos === preWinnerPts) {
       tiePoints.push(player)
     }
   })
 
+  //Funcion para revelar al ganador en caso de acertar la frase correcta 
+  const handleClickRevelar = () => {
+    setStep(1)
+    setShowAction(false)
+
+    console.log(`PlayerTurn: ${players[playerTurn]}`)
+  }
 
   // Funcion para cambiar turno si se lanza letra equivocada
   const addGuessedLetter = useCallback(
@@ -378,8 +374,7 @@ function Game() {
           <div className="flex justify-around items-center flex-row w-5/12">
               <button
                 onClick={() => {
-                  setStep(1)
-                  setShowAction(false)
+                  handleClickRevelar()
                  }}
                 className="w-28 h-28 p-4 flex items-center bg-gray-800 justify-center rounded-full border-4 border-gray-800 text-white text-lg uppercase font-black transition hover:scale-105 btn-shadow"
               >

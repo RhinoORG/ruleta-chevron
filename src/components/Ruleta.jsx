@@ -85,6 +85,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
             setPlayerTurn(0)
           }
           setReward('Siguiente jugador')
+          setMovements('')
         }, 3000)
       }
 

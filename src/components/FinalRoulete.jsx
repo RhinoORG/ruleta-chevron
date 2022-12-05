@@ -134,7 +134,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
       {finalRound !== 0 ? <div className=' flex items-center justify-center flex-col'>
             <span className='  text-white uppercase text-xs font-medium '>Nro de tiros</span>
             <div className='mb-2 text-xl font-medium rounded-xl flex items-center justify-center text-gray-200 w-24 z-20'>{finalRound}</div>
-      </div> : <div> HAS PERDIDO </div>}
+      </div> : <div className='mb-2 text-xl font-medium flex items-center justify-center text-gray-200 z-20'> Te haz quedado sin tiros, gracias por participar!! </div>}
       
 
       {finish && (
