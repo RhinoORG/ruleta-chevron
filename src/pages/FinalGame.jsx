@@ -227,6 +227,7 @@ function FinalGame() {
       {step === 0 && (
         <>
           <PlayersHUD playerActive={playerTurn} />
+          
           <EndGame />
           <Screen
             guessedLetters={guessedLetters}

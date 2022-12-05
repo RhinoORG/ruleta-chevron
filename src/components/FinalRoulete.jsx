@@ -3,10 +3,10 @@ import { usePlayers } from '../context/PlayersContext'
 
 const opts = [
   { name: 'QUIEBRA', value: 0, movements: 0 },
-  { name: 'QUIEBRA', value: 110, movements: 0 },
-  { name: 'PIERDE TURNO', value: 210, movements: 0 },
-  { name: 'COMODIN', value: 20, movements: 0 },
-  { name: 'COMODIN', value: 240, movements: 0 },
+  { name: 'PIERDE', value: 110, movements: 0 },
+  { name: 'GANA', value: 210, movements: 0 },
+  { name: 'GANADOR', value: 20, movements: 0 },
+  // { name: 'GANADOR', value: 240, movements: 0 },
 
   { name: 25, value: 330, movements: 1 },
   { name: 25, value: 80, movements: 1 },
@@ -37,10 +37,11 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
   const [showButton, setShowButton] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
+  const [finalRound, setFinalRound] = useState(3)
 
   if (!isVisible) return null
 
-  console.log(`PlayerActive ${playerActive}`)
+  console.log(`finalRound ${finalRound}`)
 
   function rotate() {
     const idx = getRandomIdx(1, 10)
@@ -50,7 +51,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
       return null
     }
 
-    setRotateDeg(opt.value / 99)
+    setRotateDeg(opt.value)
 
     console.log(opt)
 
@@ -61,13 +62,15 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
       setReward(reward)
       setFinish(true)
 
-      if (reward == 'COMODIN') {
+      if (reward == 'GANADOR') {
         player.puntos = 100 + player.puntos;
         setShowButton(false)
-        setFinish(true)
         setShowMessage(true)
         setIsClicked(false)
-        setMovements('Has ganado 100 pts. Puedes girar la ruleta de nuevo')
+        setFinish(false)
+        setIsClicked(false)
+        setReward(`Felicidades ${player.name}`)
+        setMovements('Has ganado el juego')
         return
       }
 
@@ -75,8 +78,9 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
         player.puntos = player.puntos - player.puntos;
         setFinish(true)
         setShowMessage(true)
-        setMovements('Te has quedado sin puntos')
+        setMovements('Has perdido, perdedor')
         setIsClicked(false)
+        setFinalRound(0)
 
         const playersCantity = players.length
 
@@ -92,30 +96,30 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
         }, 3000)
       }
 
-      if (reward == 'PIERDE TURNO') {
-        setMovements('Haz perdido el turno')
+      if (reward == 'PIERDE') {
+        player.puntos = player.puntos - player.puntos;
         setFinish(true)
         setShowMessage(true)
-        setShowButton(false)
+        setReward(`Has perdido un tiro, te quedan ${finalRound - 1} tiros`)
+        setMovements('Vuelve a girar')
         setIsClicked(false)
+        setFinalRound(finalRound - 1)
+
+        const playersCantity = players.length
+      }
+
+      if (reward == 'GANA') {
+        setReward(`Has ganado un tiro, te quedan ${finalRound + 1} tiros`)
+        setMovements('Tienes 2 letras')
+        setFinish(false)
+        setShowMessage(true)
+        setShowButton(true)
+        setIsClicked(false)
+        setFinalRound(finalRound + 1)
 
         player.puntos = player.puntos
 
         const playersCantity = players.length
-
-        setTimeout(() => {
-          if (playerTurn < playersCantity - 1) {
-            setPlayerTurn(playerTurn + 1)
-          }
-          if (playerTurn === playersCantity - 1) {
-            setPlayerTurn(0)
-          }
-          setReward('Siguiente jugador')
-          setMovements(`Turno de ${player.name}`)
-        }, 3000)
-
-
-
       }
 
       if (typeof reward !== 'string') {
@@ -123,6 +127,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
         setShowButton(true)
         setFinish(false)
         setMovements(`Haz ganado ${opt.movements + 1} letras`)
+        setFinalRound(finalRound - 1)
 
         setMovementsToPlay(opt.movements)
 
@@ -146,7 +151,15 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
             </svg>
           </div>
 
-          <img src='/ruletaFinal.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg * 100)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true) }} alt='' />
+          <img src='/ruletaFinal.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { 
+            if (finalRound === 0) {
+              return
+            } else {
+              rotate(); 
+              setIsClicked(true) 
+            }
+            
+            }} alt='' />
         </>)
       }
 
