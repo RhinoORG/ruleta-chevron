@@ -3,8 +3,6 @@ import { usePlayers } from '../context/PlayersContext'
 function PlayersHUD ({ playerActive }) {
   const { players } = usePlayers()
 
-  const playerOne = players.length;
-
   return (
     <aside className='absolute left-5 top-5 z-10 flex my-auto gap-10 flex-col'>
       {players.map((player, index) => (
@@ -16,13 +14,6 @@ function PlayersHUD ({ playerActive }) {
             <span className='  text-white uppercase text-xs font-medium '>{player.name}</span>
             <div className='mb-2 text-xl font-medium rounded-xl flex items-center justify-center text-gray-200 w-24 z-20'>PTS: {player.puntos}</div>
           </div>
-
-          {(playerOne === 1) && 
-            <div className=' flex items-center justify-center flex-col'>
-            <span className='  text-white uppercase text-xs font-medium '>Nro de tiros</span>
-            <div className='mb-2 text-xl font-medium rounded-xl flex items-center justify-center text-gray-200 w-24 z-20'>3</div>
-          </div>
-          }
         </div>
       ))}
     </aside>

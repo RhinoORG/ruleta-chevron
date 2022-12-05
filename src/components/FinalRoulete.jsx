@@ -131,6 +131,11 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm  flex justify-center items-center flex-col'>
+      {finalRound !== 0 ? <div className=' flex items-center justify-center flex-col'>
+            <span className='  text-white uppercase text-xs font-medium '>Nro de tiros</span>
+            <div className='mb-2 text-xl font-medium rounded-xl flex items-center justify-center text-gray-200 w-24 z-20'>{finalRound}</div>
+      </div> : <div> HAS PERDIDO </div>}
+      
 
       {finish && (
         <>
@@ -171,6 +176,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
           Jugar
         </button>
       }
+
     </div>
   )
 }
