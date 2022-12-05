@@ -12,7 +12,7 @@ import { getWord } from "../constants"
 import { usePlayers } from "../context/PlayersContext"
 
 function Game() {
-  const { players, playerTurn, setPlayerTurn } = usePlayers();
+  const { players, playerTurn, setPlayerTurn, createPlayers } = usePlayers();
   const [wordToGess, setwordToGess] = useState(getWord())
   const [guessedLetters, setGuessedLetters] = useState([])
   const [showRuleta, setShowRuleta] = useState(false)
@@ -85,13 +85,31 @@ function Game() {
   console.log(isWinnerArray[0], "IsWinner");
   console.log(isWinner);
 
+  /**
+   * Funcion para calcular el mayor puntuaje ganador o empate
+   * @param
+   * @returns 
+   */
+
+  //Puntos completos de la partida
   let pts = [];
+
   players.map((player) => {
     pts.push(player.puntos);
   });
+
+  //Mayor puntuacion
   const preWinnerPts = Math.max(...pts);
-  console.log(pts);
-  console.log(preWinnerPts);
+
+  //Player empatados, con nombres y puntos
+  let tiePoints = [];
+
+  players.map((player) => {
+    if (player.puntos === preWinnerPts) {
+      tiePoints.push(player)
+    }
+  })
+
 
   // Funcion para cambiar turno si se lanza letra equivocada
   const addGuessedLetter = useCallback(
@@ -171,7 +189,7 @@ function Game() {
       }
 
       setGuessedLetters([]);
-      
+
     }
 
     document.addEventListener("keypress", handler);
@@ -185,8 +203,14 @@ function Game() {
     if (wordToGess.phrase.split() === guessedLetters) {
       console.log("winner");
     }
-    if (isWinner === true) {
+    if (isWinner === true && tiePoints.length === 1) {
       setStep(1);
+      createPlayers(tiePoints)
+    }
+
+    if (isWinner === true && tiePoints.length >= 2) {
+      setStep(2);
+      createPlayers(tiePoints)
     }
   }, [isWinner]);
 
@@ -215,6 +239,7 @@ function Game() {
           </div>
         </>
       )}
+
       {step === 1 && (
         <>
           {players.map((player, index) => {
@@ -245,7 +270,7 @@ function Game() {
           <button
             className="bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold rounded-xl relative text-white"
             onClick={() => {
-              setStep(2)
+              setStep(3)
               setwordToGess(getWord())
               setGuessedLetters([])
             }}
@@ -254,7 +279,48 @@ function Game() {
           </button>
         </>
       )}
+
       {step === 2 && (
+        <>
+          {players.map((player, index) => {
+            if (player.puntos === preWinnerPts) {
+              return (
+                <div className="transition relative flex items-center gap-2 border-2 border-cyan-500 rounded-xl px-2 py-2 mb-10">
+                  <header className="w-12 h-16 rounded-xl bg-cyan-500 flex items-center justify-center text-2xl font-medium text-gray-200">
+                    J{index + 1}
+                  </header>
+                  <div className=" flex items-center justify-center flex-col">
+                    <span className="  text-white uppercase text-xs font-medium ">
+                      {player.name}
+                    </span>
+                    <div className="mb-2 text-xl font-medium rounded-xl flex items-center justify-center text-gray-200 w-24 z-20">
+                      PTS: {player.puntos}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+          })}
+          <h1 className="text-white text-4xl font-bold uppercase">
+            ¡Ha habido un empate!
+          </h1>
+          <p className="text-gray-200 4text-3xl my-5 uppercase font-medium">
+            Debemos jugar una ronda mas para elegir al fucking mejor
+          </p>
+          <button
+            className="bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold rounded-xl relative text-white"
+            onClick={() => {
+              setStep(3)
+              setwordToGess(getWord())
+              setGuessedLetters([])
+            }}
+          >
+            Avanzar
+          </button>
+        </>
+      )}
+
+      {step === 3 && (
         <>
           <PlayersHUD playerActive={playerTurn} />
           <EndGame />
