@@ -6,7 +6,7 @@ const opts = [
   { name: 'PIERDE', value: 110, movements: 0 },
   { name: 'GANA', value: 210, movements: 0 },
   { name: 'GANADOR', value: 20, movements: 0 },
-  // { name: 'GANADOR', value: 240, movements: 0 },
+  { name: 'QUIEBRA', value: 240, movements: 0 },
 
   { name: 25, value: 330, movements: 1 },
   { name: 25, value: 80, movements: 1 },
@@ -76,24 +76,13 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
 
       if (reward == 'QUIEBRA') {
         player.puntos = player.puntos - player.puntos;
-        setFinish(true)
+        setShowButton(false)
         setShowMessage(true)
-        setMovements('Has perdido, perdedor')
         setIsClicked(false)
-        setFinalRound(0)
-
-        const playersCantity = players.length
-
-        setTimeout(() => {
-          if (playerTurn < playersCantity - 1) {
-            setPlayerTurn(playerTurn + 1)
-          }
-          if (playerTurn === playersCantity - 1) {
-            setPlayerTurn(0)
-          }
-          setReward('Siguiente jugador')
-          setMovements(`Turno de ${player.name}`)
-        }, 3000)
+        setFinish(false)
+        setIsClicked(false)
+        setReward(`Lo sentimos ${player.name}`)
+        setMovements('Has perdido el juego')
       }
 
       if (reward == 'PIERDE') {

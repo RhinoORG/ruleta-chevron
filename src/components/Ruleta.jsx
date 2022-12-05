@@ -85,7 +85,6 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
             setPlayerTurn(0)
           }
           setReward('Siguiente jugador')
-          setMovements(`Turno de ${player.name}`)
         }, 3000)
       }
 
@@ -108,7 +107,6 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
             setPlayerTurn(0)
           }
           setReward('Siguiente jugador')
-          setMovements(`Turno de ${player.name}`)
         }, 3000)
 
 
