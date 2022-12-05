@@ -5,7 +5,7 @@ import { getWord } from '../constants'
 import { usePlayers } from '../context/PlayersContext'
 
 function Game () {
-  const { players, playerTurn, setPlayerTurn } = usePlayers()
+  const { players, playerTurn, setPlayerTurn, createPlayers } = usePlayers()
   const [wordToGuess, setWordToGuess] = useState(getWord().phrase)
   const [trackPhrase, setTrackPhrase] = useState(getWord().track)
   const [guessedLetters, setGuessedLetters] = useState([])
@@ -15,6 +15,7 @@ function Game () {
   const [step, setStep] =  useState(0)
   const [count, setCount] = useState(0)
   const [movements, setMovements] = useState(0)
+  const [tie, setTie] = useState(false)
 
   // eslint-disable-next-line no-unused-vars
   const [location, navigate] = useLocation();
@@ -67,27 +68,44 @@ function Game () {
 
  const correctLetters = guessedLetters.filter((letter) =>
   wordToGuess.includes(letter)
-);
+  );
 
-let isWinnerArray = [];
+  let isWinnerArray = [];
 
-isWinnerArray.push(wordToGuess.split(""));
-guessedLetters.push(" ");
+  isWinnerArray.push(wordToGuess.split(""));
+  guessedLetters.push(" ");
 
-const isWinner = isWinnerArray[0].every((letter) =>
-  correctLetters.includes(letter)
-);
-console.log(correctLetters, "letters");
-console.log(isWinnerArray[0], "IsWinner");
-console.log(isWinner);
+  const isWinner = isWinnerArray[0].every((letter) =>
+    correctLetters.includes(letter)
+  );
+  console.log(correctLetters, "letters");
+  console.log(isWinnerArray[0], "IsWinner");
+  console.log(isWinner);
 
-let pts = [];
-players.map((player) => {
-  pts.push(player.puntos);
-});
-const preWinnerPts = Math.max(...pts);
-console.log(pts);
-console.log(preWinnerPts);
+  /**
+   * Funcion para calcular el mayor puntuaje ganador o empate
+   * @param
+   * @returns 
+   */
+
+  //Puntos completos de la partida
+  let pts = [];
+  
+  players.map((player) => {
+    pts.push(player.puntos);
+  });
+  
+  //Mayor puntuacion
+  const preWinnerPts = Math.max(...pts);
+
+  //Player empatados, con nombres y puntos
+  let tiePoints = [];
+
+  players.map((player) => {
+    if(player.puntos === preWinnerPts){
+      tiePoints.push(player)
+    }
+  })
 
   // Funcion para cambiar turno si se lanza letra equivocada
   const addGuessedLetter = useCallback((letter) => {
@@ -101,6 +119,8 @@ console.log(preWinnerPts);
     },
     [guessedLetters, isWinner]
   )
+
+  console.log(wordToGuess)
 
   //Letra no encontrada en la frase (ROJO)
   useEffect(() => {
@@ -184,8 +204,13 @@ console.log(preWinnerPts);
     if (wordToGuess.split() === guessedLetters) {
       console.log("winner");
     }
-    if (isWinner === true) {
+    if (isWinner === true && tiePoints.length === 1) {
       setStep(1);
+    }
+
+    if (isWinner === true && tiePoints.length >= 2) {
+      setStep(3);
+      createPlayers(tiePoints)
     }
   }, [isWinner]);
 
@@ -210,6 +235,7 @@ console.log(preWinnerPts);
       </div>
       </>
 )}
+
 {step === 1 && (
   <>
   {players.map((player, index) => {
@@ -232,6 +258,7 @@ console.log(preWinnerPts);
    <button className='bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold rounded-xl relative text-white' onClick={() => {setStep(2)}}>Avanzar</button>
   </>
 )}
+
  {step === 2 && (
       <>
       <PlayersHUD playerActive={playerTurn} />
@@ -250,6 +277,29 @@ console.log(preWinnerPts);
         />
       </div>
       </>
+)}
+
+{step === 3 && (
+  <>
+  {players.map((player, index) => {
+            if (player.puntos === preWinnerPts) {
+              return (
+<div className='transition relative flex items-center gap-2 border-2 border-cyan-500 rounded-xl px-2 py-2 mb-10'>
+<header className='w-12 h-16 rounded-xl bg-cyan-500 flex items-center justify-center text-2xl font-medium text-gray-200'>
+  J{index + 1}
+</header>
+<div className=' flex items-center justify-center flex-col'>
+  <span className='  text-white uppercase text-xs font-medium '>{player.name}</span>
+  <div className='mb-2 text-xl font-medium rounded-xl flex items-center justify-center text-gray-200 w-24 z-20'>PTS: {player.puntos}</div>
+</div>
+</div>
+              );
+            }
+          })}
+   <h1 className='text-white text-4xl font-bold uppercase'>¡Ha habido un empate!</h1>
+   <p className='text-gray-200 4text-3xl my-5 uppercase font-medium'>Vamos a una ronda para desempatar la partida</p>
+   <button className='bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold rounded-xl relative text-white' onClick={() => {setStep(2)}}>Avanzar</button>
+  </>
 )}
       {showAction !== false &&
         <section className='h-full w-full bg-black/5 backdrop-blur-sm  absolute flex justify-center items-center'>
