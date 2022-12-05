@@ -40,6 +40,8 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
 
   if (!isVisible) return null
 
+  console.log(`PlayerActive ${playerActive}`)
+
   function rotate() {
     const idx = getRandomIdx(1, 10)
     const opt = opts[idx]
@@ -121,9 +123,9 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
         setShowButton(true)
         setFinish(false)
         setMovements(`Haz ganado ${opt.movements + 1} letras`)
-  
+
         setMovementsToPlay(opt.movements)
-      
+
         player.puntos = player.puntos + reward
       }
 
@@ -139,10 +141,10 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
       {finish && (
         <>
           <div className='w-3 h-14  relative -bottom-6   z-50' >
-          <svg height="200" width="200">
-        <polygon points="10,100 25,0 0,0" fill="red" />
-      </svg>
-            </div>
+            <svg height="200" width="200">
+              <polygon points="10,100 25,0 0,0" fill="red" />
+            </svg>
+          </div>
 
           <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg * 100)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true) }} alt='' />
         </>)
