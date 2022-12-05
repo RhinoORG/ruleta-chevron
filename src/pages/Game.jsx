@@ -206,6 +206,7 @@ function Game () {
     }
     if (isWinner === true && tiePoints.length === 1) {
       setStep(1);
+      createPlayers(tiePoints)
     }
 
     if (isWinner === true && tiePoints.length >= 2) {
