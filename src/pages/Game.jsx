@@ -7,6 +7,7 @@ import { usePlayers } from '../context/PlayersContext'
 function Game () {
   const { players, playerTurn, setPlayerTurn } = usePlayers()
   const [wordToGuess, setWordToGuess] = useState(getWord().phrase)
+  const [trackPhrase, setTrackPhrase] = useState(getWord().track)
   const [guessedLetters, setGuessedLetters] = useState([])
   const [showRuleta, setShowRuleta] = useState(false)
   const [showAction, setShowAction] = useState(true)
@@ -101,9 +102,6 @@ console.log(preWinnerPts);
     [guessedLetters, isWinner]
   )
 
-  console.log(`Este es el count ${count}`)
-  console.log(`Este es el movenment ${movements}`)
-
   //Letra no encontrada en la frase (ROJO)
   useEffect(() => {
     const handler = (e) => {
@@ -172,6 +170,7 @@ console.log(preWinnerPts);
 
       setGuessedLetters([])
       setWordToGuess(getWord())
+      setTrackPhrase(getWord())
     }
 
     document.addEventListener("keypress", handler);
@@ -196,7 +195,7 @@ console.log(preWinnerPts);
       <>
       <PlayersHUD playerActive={playerTurn} />
       <EndGame />
-      <Screen guessedLetters={guessedLetters} track={getWord().track} wordToGuess={wordToGuess} />
+      <Screen guessedLetters={guessedLetters} track={trackPhrase} wordToGuess={wordToGuess} />
       <div className='max-w-3xl'>
         <Keyboard
           disabled={isWinner}
