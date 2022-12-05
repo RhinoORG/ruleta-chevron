@@ -55,7 +55,7 @@ function Game() {
   const handleFinishGame = () => {
     setGuessedLetters([]);
     window.localStorage.removeItem("players");
-    navigate("/create-players");
+    navigate("/");
     setPlayerTurn(0);
     setFinishGameModal(false);
   };

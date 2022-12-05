@@ -53,7 +53,7 @@ function FinalGame() {
   const handleFinishGame = () => {
     setGuessedLetters([]);
     window.localStorage.removeItem("players");
-    navigate("/create-players");
+    navigate("/");
     setPlayerTurn(0);
     setFinishGameModal(false);
   };
@@ -269,7 +269,7 @@ function FinalGame() {
             }
           })}
           <h1 className="text-white text-4xl font-bold uppercase">
-            ¡En hora buena, has ganado el partido final, eres el campeon, felicidades!
+            ¡En hora buena, has ganado el juego!
           </h1>
         </>
       )}
@@ -336,7 +336,7 @@ function FinalGame() {
         </div>
       )}
       <button
-        className="absolute w-14 h-14 rounded-full right-3 top-2 border-4 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow"
+        className="absolute w-14 h-14 rounded-full right-3 top-2 border-4 bg-gray-800 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow"
         onClick={() => setFinishGameModal((prev) => !prev)}
       >
         X

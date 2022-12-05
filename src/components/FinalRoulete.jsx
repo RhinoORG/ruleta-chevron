@@ -74,7 +74,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
       }
 
       if (reward == 'QUIEBRA') {
-        player.puntos = player.puntos - player.puntos;
+        
         setShowButton(false)
         setShowMessage(true)
         setIsClicked(false)
@@ -85,7 +85,6 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
       }
 
       if (reward == 'PIERDE') {
-        player.puntos = player.puntos - player.puntos;
         setFinish(true)
         setShowMessage(true)
         setReward(`Has perdido un tiro, te quedan ${finalRound - 1} tiros`)
@@ -105,7 +104,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
         setIsClicked(false)
         setFinalRound(finalRound + 1)
 
-        player.puntos = player.puntos
+       // player.puntos = player.puntos
 
         const playersCantity = players.length
       }
@@ -119,7 +118,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
 
         setMovementsToPlay(opt.movements)
 
-        player.puntos = player.puntos + reward
+        //player.puntos = player.puntos + reward
       }
 
       window.localStorage.setItem('players', `${JSON.stringify(players)}`)
@@ -157,7 +156,7 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
       }
 
       {showMessage && <>
-        <h2 className='text-gray-200 text-5xl my-7 uppercase font-medium'>{reward}</h2>
+        <h2 className='text-center w-8/12 text-gray-200 text-4xl my-7 uppercase font-medium'>{reward}</h2>
         <h4 className='text-gray-200 4text-3xl my-5 uppercase font-medium'>{movements}</h4>
       </>
       }
