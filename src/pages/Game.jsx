@@ -278,9 +278,7 @@ function Game() {
           <button
             className="bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold rounded-xl relative text-white"
             onClick={() => {
-              setStep(3)
-              setwordToGess(getWord())
-              setGuessedLetters([])
+              navigate("/final-game");
             }}
           >
             Avanzar
