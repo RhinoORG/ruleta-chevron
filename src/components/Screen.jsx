@@ -6,7 +6,7 @@ const Spacer = () => (
 
 function Screen ({
   guessedLetters,
-  wordToGuess,
+  wordTo,
   reveal = false,
   track
 }) {
@@ -16,7 +16,7 @@ function Screen ({
     <div className='relative p-4 my-5 gap-1 flex flex-wrap w-8/12'>
   
       <Spacer />
-      {wordToGuess.split(' ').map((letter, index) => {
+      {wordTo.split(' ').map((letter, index) => {
         return (
           <React.Fragment key={index}>
             <div className='flex gap-2'>

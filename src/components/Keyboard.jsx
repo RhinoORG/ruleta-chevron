@@ -6,7 +6,7 @@ function Keyboard ({
   addGuessedLetter,
   disabled = false,
   sumCount,
-  wordToGuess
+  wordTo
 }) {
   return (
     <div
@@ -15,7 +15,7 @@ function Keyboard ({
       {KEYS.map(key => {
         const isActive = activeLetters.includes(key)
         const isInactive = inactiveLetters.includes(key)
-        const containLetter = !wordToGuess.includes(key)
+        const containLetter = !wordTo.includes(key)
 
         return (
           <button
