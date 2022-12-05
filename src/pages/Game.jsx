@@ -21,7 +21,6 @@ function Game() {
   const [step, setStep] = useState(0)
   const [count, setCount] = useState(0)
   const [movements, setMovements] = useState(0)
-  const [quiebra, setQuiebra] = useState(false)
 
   // eslint-disable-next-line no-unused-vars
   const [location, navigate] = useLocation();
@@ -37,8 +36,8 @@ function Game() {
     let player = players[playerTurn]
     changePlayerTurn()
     player.puntos = player.puntos - player.puntos;
+    // setShowRuleta(true)
   };
-
 
   const setMovementsToPlay = (n) => {
     setMovements(n);
@@ -49,7 +48,8 @@ function Game() {
   };
 
   const removeRuletaFromRuleta = () => {
-    setShowRuleta(false);
+    setShowRuleta(false)
+    setShowAction(false)
   };
 
   const handleFinishGame = () => {
@@ -77,21 +77,35 @@ function Game() {
     (letter) => !wordToGess.phrase.includes(letter)
   );
 
-  const correctLetters = guessedLetters.filter((letter) =>
+  let correctLetters = [];
+
+  correctLetters = guessedLetters.filter((letter) =>
     wordToGess.phrase.includes(letter)
   );
 
+  console.log('CorrectLetters', wordToGess.phrase)
+  
   let isWinnerArray = [];
-
+  
   isWinnerArray.push(wordToGess.phrase.split(""));
   guessedLetters.push(" ");
 
-  const isWinner = isWinnerArray[0].every((letter) =>
+  let isWinner = isWinnerArray[0].every((letter) =>
     correctLetters.includes(letter)
   );
-  console.log(correctLetters, "letters");
-  console.log(isWinnerArray[0], "IsWinner");
-  console.log(isWinner);
+
+  // console.log("IsWinnerArray", isWinnerArray[0]);
+  
+  const handleRevelar = () => {
+    setShowRuleta(false);
+    setShowAction(false);
+    correctLetters.push(wordToGess.phrase);
+  }
+
+  
+  console.log('CorrectLetters', correctLetters)
+
+  
 
   /**
    * Funcion para calcular el mayor puntuaje ganador o empate
@@ -362,7 +376,7 @@ function Game() {
 
             <div className="flex ">
               <button
-                onClick={handleClickRuleta}
+                onClick={handleRevelar}
                 className="mx-1 top-2 border-4 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow"
               >
                 Revelar frase
@@ -384,7 +398,6 @@ function Game() {
         playerActive={playerTurn}
         removeRuletaFromRuleta={removeRuletaFromRuleta}
         setMovementsToPlay={setMovementsToPlay}
-        quiebra={quiebra}
       />
       {showFinishGameModal && (
         <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm z-50 flex justify-center items-center flex-col">

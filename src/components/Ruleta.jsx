@@ -40,7 +40,6 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
 
   if (!isVisible) return null
 
-  console.log(`PlayerActive ${playerActive}`)
 
   function rotate() {
     const idx = getRandomIdx(1, 10)
@@ -51,9 +50,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
     }
 
     setRotateDeg(opt.value / 99)
-
-    console.log(opt)
-
+  
     setTimeout(() => {
       const reward = opt.name
       const player = players[playerActive]
@@ -161,7 +158,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
           className='bg-lime-500 px-5 py-2 my-4 rounded-xl rounded-mfont-semibold  relative text-white'
           onClick={() => {
             setFinish(true);
-            removeRuletaFromRuleta(false)
+            removeRuletaFromRuleta()
             setShowMessage(false)
             setShowButton(false)
             setIsClicked(false)
