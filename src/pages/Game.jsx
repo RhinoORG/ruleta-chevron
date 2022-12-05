@@ -125,6 +125,7 @@ function Game() {
   const handleClickRevelar = () => {
     setStep(1)
     setShowAction(false)
+    createPlayers(tiePoints)
 
     console.log(`PlayerTurn: ${players[playerTurn]}`)
   }

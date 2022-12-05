@@ -252,7 +252,7 @@ function FinalGame() {
           {players.map((player, index) => {
             if (player.puntos === preWinnerPts) {
               return (
-                <div className="transition relative flex items-center gap-2 border-2 border-cyan-500 rounded-xl px-2 py-2 mb-10">
+                <div key={index} className="transition relative flex items-center gap-2 border-2 border-cyan-500 rounded-xl px-2 py-2 mb-10">
                   <header className="w-12 h-16 rounded-xl bg-cyan-500 flex items-center justify-center text-2xl font-medium text-gray-200">
                     J{index + 1}
                   </header>

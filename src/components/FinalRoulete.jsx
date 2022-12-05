@@ -63,7 +63,6 @@ function FinalRoulete({ isVisible, playerActive, removeRuletaFromRuleta, setMove
       setFinish(true)
 
       if (reward == 'GANADOR') {
-        player.puntos = 100 + player.puntos;
         setShowButton(false)
         setShowMessage(true)
         setIsClicked(false)
