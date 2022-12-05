@@ -289,8 +289,8 @@ function FinalGame() {
       )}
 
       {showAction !== false && (
-        <section className="h-full w-full bg-black/5 backdrop-blur-sm  absolute flex justify-center items-center">
-          <div className="right-20 z-30 w-60 h-60 flex-col justify-center items-center">
+        <section className="h-full w-full bg-black/60 backdrop-blur-sm  absolute flex flex-col justify-center items-center">
+          <div className="right-20 z-30 w-60 h-60 flex flex-col justify-center items-center">
             <div className="animate-ping absolute w-36 h-36 rounded-full opacity-75 bg-green-600"></div>
             <button
               onClick={handleClickRuleta}
@@ -298,24 +298,25 @@ function FinalGame() {
             >
               Girar
             </button>
-
-            <div className="flex ">
+          </div>
+          <div className="flex justify-around items-center flex-row w-5/12">
               <button
-                onClick={handleClickRuleta}
-                className="mx-1 top-2 border-4 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow"
+                onClick={() => {
+                  setStep(1)
+                  setShowAction(false)
+                 }}
+                className="w-28 h-28 p-4 flex items-center bg-gray-800 justify-center rounded-full border-4 border-gray-800 text-white text-lg uppercase font-black transition hover:scale-105 btn-shadow"
               >
-                Revelar frase
+                Revelar
               </button>
 
               <button
-                onClick={handleClickQuiebra}
-                className="mx-1 top-2 border-4 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow"
+                onClick={ handleClickQuiebra}
+                className="w-28 h-28 p-4 flex items-center bg-gray-800 justify-center rounded-full border-4 border-gray-800 text-white text-lg uppercase font-black transition hover:scale-105 btn-shadow"
               >
                 Quebrar
               </button>
             </div>
-
-          </div>
         </section>
       )}
       <FinalRoulete
