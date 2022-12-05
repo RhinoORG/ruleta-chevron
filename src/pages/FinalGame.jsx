@@ -269,21 +269,8 @@ function FinalGame() {
             }
           })}
           <h1 className="text-white text-4xl font-bold uppercase">
-            ¡En hora buena, has ganado la ronda calificatoria!
+            ¡En hora buena, has ganado el partido final, eres el campeon, felicidades!
           </h1>
-          <p className="text-gray-200 4text-3xl my-5 uppercase font-medium">
-            Decifra la frase final para ganar el juego...
-          </p>
-          <button
-            className="bg-lime-500 px-5 py-2 my-4 rounded-mfont-semibold rounded-xl relative text-white"
-            onClick={() => {
-              setStep(3)
-              setwordToGess(getWord())
-              setGuessedLetters([])
-            }}
-          >
-            Avanzar
-          </button>
         </>
       )}
 
