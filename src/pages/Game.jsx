@@ -246,6 +246,8 @@ console.log(preWinnerPts);
             wordToGuess.includes(letter)
           )}
           inactiveLetters={incorrectLetters}
+          sumCount={sumCount}
+          wordToGuess={wordToGuess}
         />
       </div>
       </>

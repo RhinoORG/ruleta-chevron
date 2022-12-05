@@ -13,7 +13,7 @@ function Screen ({
   return (
     <>
     <span className=' text-white text-3xl font-bold uppercase'>{track}</span>
-    <div className='relative p-4 my-10 gap-1 flex flex-wrap w-7/12'>
+    <div className='relative p-4 my-5 gap-1 flex flex-wrap w-8/12'>
   
       <Spacer />
       {wordToGuess.split(' ').map((letter, index) => {
