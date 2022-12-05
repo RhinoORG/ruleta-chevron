@@ -21,6 +21,7 @@ function Game() {
   const [step, setStep] = useState(0)
   const [count, setCount] = useState(0)
   const [movements, setMovements] = useState(0)
+  const [quiebra, setQuiebra] = useState(false)
 
   // eslint-disable-next-line no-unused-vars
   const [location, navigate] = useLocation();
@@ -31,6 +32,13 @@ function Game() {
     setCount(0);
     setMovements(0);
   };
+
+  const handleClickQuiebra = () => {
+    let player = players[playerTurn]
+    changePlayerTurn()
+    player.puntos = player.puntos - player.puntos;
+  };
+
 
   const setMovementsToPlay = (n) => {
     setMovements(n);
@@ -345,7 +353,7 @@ function Game() {
       )}
       {showAction !== false && (
         <section className="h-full w-full bg-black/5 backdrop-blur-sm  absolute flex justify-center items-center">
-          <div className="right-20 z-30 w-60 h-60  flex justify-center items-center">
+          <div className="right-20 z-30 w-60 h-60 flex-col justify-center items-center">
             <div className="animate-ping absolute w-36 h-36 rounded-full opacity-75 bg-green-600"></div>
             <button
               onClick={handleClickRuleta}
@@ -353,6 +361,23 @@ function Game() {
             >
               Girar
             </button>
+
+            <div className="flex ">
+              <button
+                onClick={handleClickRuleta}
+                className="mx-1 top-2 border-4 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow"
+              >
+                Revelar frase
+              </button>
+
+              <button
+                onClick={handleClickQuiebra}
+                className="mx-1 top-2 border-4 border-gray-800 text-white text-2xl uppercase font-black transition hover:scale-105 btn-shadow"
+              >
+                Quebrar
+              </button>
+            </div>
+
           </div>
         </section>
       )}
@@ -361,6 +386,7 @@ function Game() {
         playerActive={playerTurn}
         removeRuletaFromRuleta={removeRuletaFromRuleta}
         setMovementsToPlay={setMovementsToPlay}
+        quiebra={quiebra}
       />
       {showFinishGameModal && (
         <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm z-50 flex justify-center items-center flex-col">
