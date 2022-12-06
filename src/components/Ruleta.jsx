@@ -42,14 +42,10 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
 
 
   function rotate() {
-    const idx = getRandomIdx(1, 10)
+    const idx = getRandomIdx(1, 16)
     const opt = opts[idx]
 
-    if (isClicked) {
-      return null
-    }
-
-    setRotateDeg(opt.value / 99)
+    setRotateDeg(opt.value)
   
     setTimeout(() => {
       const reward = opt.name
@@ -142,7 +138,7 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
             </svg>
           </div>
 
-          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg * 100)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true) }} alt='' />
+          <img src='/ruleta.png' style={{ transition: '5s all', transform: `rotate(${(rotateDeg)}deg` }} className='w-[400px] h-[400px]   rounded-full' onClick={() => { rotate(); setIsClicked(true) }} alt='' />
         </>)
       }
 
