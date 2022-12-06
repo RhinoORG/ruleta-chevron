@@ -40,36 +40,6 @@ function Ruleta({ isVisible, playerActive, removeRuletaFromRuleta, setMovementsT
 
   if (!isVisible) return null
 
-  // function animarEvent() {
-		
-	// 	var ruleta_temp = rulets_data;
-
-	// 	let grados_circulo 	=	360;
-	// 	let premio 	= 	grados_circulo / 16;
-		
-	// 	var valor_aleatorio =	Math.floor(Math.random()*16);
-	// 	var ruleta_result 	= 	premio * valor_aleatorio;
-	// 	var valor_premio 	= 	(grados_circulo	* 8) + ruleta_result;
-		
-	// 	rulets_data = 	valor_aleatorio;
-
-	// 	// puntos ganados
-	// 	points_data 	= 	this.premios_list[valor_aleatorio];
-		
-	// 	this.setState({
-	// 		data_ruleta: ruleta_temp * premio,
-	// 		animated_ruleta: true,
-	// 	})
-		
-	// 	setTimeout(() => {
-	// 		this.ruleta.current.classList.add('img-ruleta');
-	// 		this.setState({
-	// 			data_ruleta: valor_premio,
-	// 		})
-	// 	}, 200);
-		
-	// }
-
 
   function rotate() {
     const idx = getRandomIdx(1, 16)
