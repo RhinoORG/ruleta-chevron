@@ -36,7 +36,6 @@ function Game() {
     let player = players[playerTurn]
     changePlayerTurn()
     player.puntos = player.puntos - player.puntos;
-    // setShowRuleta(true)
   };
 
   const setMovementsToPlay = (n) => {
@@ -123,11 +122,11 @@ function Game() {
 
   //Funcion para revelar al ganador en caso de acertar la frase correcta 
   const handleClickRevelar = () => {
+    let player = JSON.stringify(players[playerTurn])
     setStep(1)
     setShowAction(false)
-    createPlayers(tiePoints)
-
-    console.log(`PlayerTurn: ${players[playerTurn]}`)
+    
+    console.log(`PlayerTurnPoints: ${player}`)
   }
 
   // Funcion para cambiar turno si se lanza letra equivocada
