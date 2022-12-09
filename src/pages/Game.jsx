@@ -122,8 +122,17 @@ function Game() {
 
   //Funcion para revelar al ganador en caso de acertar la frase correcta 
   const handleClickRevelar = () => {
+    if (tiePoints.length === 1) {
+      setStep(1);
+      createPlayers(tiePoints)
+    }
+
+    if (tiePoints.length >= 2) {
+      setStep(2);
+      createPlayers(tiePoints)
+    }
+
     let player = JSON.stringify(players[playerTurn])
-    setStep(1)
     setShowAction(false)
     
     console.log(`PlayerTurnPoints: ${player}`)

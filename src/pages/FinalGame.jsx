@@ -33,10 +33,6 @@ function FinalGame() {
     setMovements(0);
   };
 
-  const handleClickQuiebra = () => {
-    player.puntos = player.puntos - player.puntos;
-  };
-
 
   const setMovementsToPlay = (n) => {
     setMovements(n);
@@ -130,6 +126,15 @@ function FinalGame() {
     },
     [guessedLetters, isWinner]
   );
+
+  const handleClickRevelar = () => {
+    let player = JSON.stringify(players[playerTurn])
+    setStep(1)
+    setShowAction(false)
+    
+    console.log(`PlayerTurnPoints: ${player}`)
+  }
+
 
   //Letra no encontrada en la frase (ROJO)
   useEffect(() => {
@@ -297,13 +302,21 @@ function FinalGame() {
               </button>
 
               <button
-                onClick={ handleClickQuiebra}
+                onClick={() => {
+                  setStep(5)
+                  setShowAction(false)
+                }}
                 className="w-28 h-28 p-4 flex items-center bg-gray-800 justify-center rounded-full border-4 border-gray-800 text-white text-lg uppercase font-black transition hover:scale-105 btn-shadow"
               >
                 Quebrar
               </button>
             </div>
         </section>
+      )}
+      {step === 5 && (
+            <div className='fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm  flex justify-center items-center flex-col'>
+              <div className='text-white text-4xl font-bold uppercase'> Has perdido el juego, gracias por participar!! </div>
+             </div>
       )}
       <FinalRoulete
         isVisible={showRuleta}
